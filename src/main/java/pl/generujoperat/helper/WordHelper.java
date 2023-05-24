@@ -18,18 +18,18 @@ import pl.generujoperat.model.TechnicalReport;
 public class WordHelper {
 
 
-  public static ByteArrayInputStream generateWord()
+  public static ByteArrayInputStream generateWord(String idReport)
       throws FileNotFoundException, IOException,
       InvalidFormatException {
 
     try (XWPFDocument doc = new XWPFDocument()) {
       TechnicalReport techReport=new TechnicalReport();
-      techReport.createHeader(doc);
+      techReport.createHeader(doc, idReport);
 
       XWPFParagraph p1 = doc.createParagraph();
       p1.setAlignment(ParagraphAlignment.CENTER);
       XWPFRun r1 = p1.createRun();
-      techReport.styleTextAndAddBreak(r1, true, false, 28, "OPERAT TECHNICZNY", "Times New Roman");
+      techReport.styleTextAndAddBreak(r1, true, false, 28, "OPERAT TECHNICZNY" + idReport, "Times New Roman");
 
 
       XWPFParagraph p2 = doc.createParagraph();

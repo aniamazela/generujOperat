@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Generuj operat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .header {
+            padding: 60px;
+            text-align: center;
+            background: #1abc9c;
+            color: white;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Generuj operat</h1>
+      </div>
+      <br><br>
+    <form method="post" th:action="@{/api/word}" th:object="${technicalReport}">
+        <div class="mb-3 mt-3">
+            <label for="idBG">Id roboty geodezyjnej:</label>
+            <input type="text" class="form-control" id="idBG" placeholder="Podaj id roboty geodezyjnej" 
+            name="myIdBG" th:field="*{idReport}">
+            <input type="submit" value="Submit" />
+          </div>
+    </form>
+</body>
+
+</html>

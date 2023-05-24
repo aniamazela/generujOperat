@@ -31,7 +31,7 @@ public class TechnicalReport {
     run.addBreak();
   }
 
-  public void createHeader(XWPFDocument doc) {
+  public void createHeader(XWPFDocument doc, String idReport) {
     XWPFHeaderFooterPolicy headerFooterPolicy = doc.getHeaderFooterPolicy();
     if (headerFooterPolicy == null)
       headerFooterPolicy = doc.createHeaderFooterPolicy();
@@ -46,7 +46,7 @@ public class TechnicalReport {
     styleTextAndAddBreak(run, false, true, 11, "dz.ew. ", "Times New Roman");
     styleTextAndAddBreak(run, false, true, 11, "ul. ", "Times New Roman");
     XWPFRun runBG = paragraph.createRun();
-    styleTextAndAddBreak(runBG, true, true, 11, "BG.6640 ", "Times New Roman");
+    styleTextAndAddBreak(runBG, true, true, 11, idReport, "Times New Roman");
   }
 
   public void createContents(XWPFDocument document) {
