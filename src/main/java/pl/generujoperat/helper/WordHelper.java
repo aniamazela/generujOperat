@@ -10,8 +10,7 @@ import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+
 
 import pl.generujoperat.model.TechnicalReport;
 
@@ -29,7 +28,7 @@ public class WordHelper {
       XWPFParagraph p1 = doc.createParagraph();
       p1.setAlignment(ParagraphAlignment.CENTER);
       XWPFRun r1 = p1.createRun();
-      techReport.styleTextAndAddBreak(r1, true, false, 28, "OPERAT TECHNICZNY" + idReport, "Times New Roman");
+      techReport.styleTextAndAddBreak(r1, true, false, 28, "OPERAT TECHNICZNY", "Times New Roman");
 
 
       XWPFParagraph p2 = doc.createParagraph();
@@ -52,7 +51,7 @@ public class WordHelper {
             p4.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun r4 = p4.createRun();
             r4.addBreak();
-            techReport.styleText(r4, false, true, 13, "sporządził: geodeta uprawniony  nr 111", "Arial");
+            techReport.styleText(r4, false, true, 13, "sporządził: geodeta uprawniony  nr 111 ", "Arial");
             techReport.styleText(r4, false, true, 13, "Jan Nowak ", "Arial");
             r4.addBreak();
             techReport.styleText(r4, false, true, 13, "wykonawca:", "Arial");

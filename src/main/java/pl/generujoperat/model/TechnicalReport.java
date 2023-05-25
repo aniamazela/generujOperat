@@ -1,5 +1,8 @@
 package pl.generujoperat.model;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -31,6 +34,32 @@ public class TechnicalReport {
     run.addBreak();
   }
 
+  public ArrayList<String> createElementsOfContents() {
+    ArrayList<String> content = new ArrayList();
+    content.add("Spis treści");
+    content.add("Sprawozdanie techniczne");
+    content.add("Szkic osnowy");
+    content.add("Szkic polowy z pomiaru aktualizacyjnego + wyk. wsp.");
+    content.add("Szkic polowy z pomiaru punktów granicznych + wyk. wsp.");
+    content.add("Dzienniki pomiaru");
+    content.add("Wykaz współrzędnych punktów granicznych");
+    content.add(
+        "Wykaz współrzędnych punktów załamania linii rozgraniczających wraz ze szkicem do obliczeń oraz obliczeniami");
+    content.add("Szkic podstawowy");
+    content.add("Szkic do aktualizacji EGiB ");
+    content.add("Badania hipoteczne");
+    content.add("Dowody doręczeń zawiadomień");
+    content.add("Protokół ustalenia przebiegu granic dz.ew.");
+    content.add("Protokół wyznaczenia punktów granicznych");
+    content.add("Protokół przyjęcia granic nieruchomości");
+    content.add("Inne dokumenty lub ich uwierzytelnione kopie pozyskane i wykorzystane przez wykonawcę");
+    content.add("Mapa wywiadu terenowego");
+    content.add("Wykaz zmian danych ewidencyjnych");
+    content.add("Wykaz zmian danych budynkowych");
+    content.add("Mapa");
+    return content;
+  }
+
   public void createHeader(XWPFDocument doc, String idReport) {
     XWPFHeaderFooterPolicy headerFooterPolicy = doc.getHeaderFooterPolicy();
     if (headerFooterPolicy == null)
@@ -54,6 +83,7 @@ public class TechnicalReport {
     // Creating first Row
     XWPFTableRow row = table.getRow(0);
     XWPFParagraph paragraph = row.getCell(0).getParagraphs().get(0);
+    paragraph.setSpacingAfter(0);
     XWPFRun run = paragraph.createRun();
     styleText(run, true, true, 11, "L.p.", "Arial");
     table.setWidth("100%");
@@ -68,15 +98,26 @@ public class TechnicalReport {
     styleText(table.getRow(0).getCell(2).getParagraphs().get(0).createRun(),
         true, true, 11, "NR STRONY", "Arial");
 
-    // Creating second Row
-    // XWPFTableRow row2 = table.createRow();
 
-    for (int i = 1; i < 5; i++) {
+    ArrayList<String> content = createElementsOfContents();
+    int contentSize = createElementsOfContents().size();
+    for (int i = 1; i < contentSize; i++) {
       XWPFTableRow row2 = table.createRow();
-      row2.getCell(0).setText(String.valueOf(i));
+     // row2.getCell(0).setText(String.valueOf(i));
+     for (int j=0; j<=2; j++){
+      table.getRow(i).getCell(j).getParagraphs().get(0).setSpacingAfter(0);
+     }
+    //  table.getRow(i).getCell(0).getParagraphs().get(0).setSpacingAfter(0);
+    //  table.getRow(i).getCell(1).getParagraphs().get(0).setSpacingAfter(0);
+    //  table.getRow(i).getCell(2).getParagraphs().get(0).setSpacingAfter(0);
+      styleText(table.getRow(i).getCell(0).getParagraphs().get(0).createRun(),
+      false, true, 11, String.valueOf(i), "Arial");
+      styleText(table.getRow(i).getCell(1).getParagraphs().get(0).createRun(),
+      false, true, 11, content.get(i), "Arial");
+      //row2.getCell(0).getParagraphArray(0).setSpacingAfter(0);
+      
       // row2.getCell(1).setText(String.valueOf(i));
 
-      // getCell(i).setText("C, C ++");
     }
     // run.addBreak();
   }
