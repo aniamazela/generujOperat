@@ -87,6 +87,8 @@ public class TechnicalReport {
     XWPFRun run = paragraph.createRun();
     styleText(run, true, true, 11, "L.p.", "Arial");
     table.setWidth("100%");
+
+
     row.addNewTableCell();
     row.getCell(0).getParagraphArray(0).setSpacingAfter(0);
     row.getCell(1).getParagraphArray(0).setSpacingAfter(0);
@@ -114,6 +116,9 @@ public class TechnicalReport {
       false, true, 11, String.valueOf(i), "Arial");
       styleText(table.getRow(i).getCell(1).getParagraphs().get(0).createRun(),
       false, true, 11, content.get(i), "Arial");
+table.getRow(0).getCell(0).setWidth("13.5%");
+table.getRow(0).getCell(1).setWidth("67.3%");
+table.getRow(0).getCell(2).setWidth("19.2%");
       //row2.getCell(0).getParagraphArray(0).setSpacingAfter(0);
       
       // row2.getCell(1).setText(String.valueOf(i));
