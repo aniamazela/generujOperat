@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.generujoperat.helper.WordHelper;
 import pl.generujoperat.model.TechnicalReport;
+import pl.generujoperat.repositories.CompanyRepository;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -20,10 +21,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/api")
 public class WordController {
+        private final CompanyRepository companyRepo;
 
+        public WordController(CompanyRepository companyRepo) {
+                this.companyRepo = companyRepo;
+            }
+            
         @GetMapping()
         public String home(Model model) {
                 model.addAttribute("technicalReport", new TechnicalReport());
+                model.addAttribute("companies", companyRepo.findAll());
                 return "form";
         }
 

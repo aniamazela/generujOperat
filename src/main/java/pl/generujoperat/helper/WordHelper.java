@@ -35,7 +35,7 @@ public class WordHelper {
       p2.setAlignment(ParagraphAlignment.CENTER);
       XWPFRun r2 = p2.createRun();
       techReport.styleTextAndAddBreak(r2, false, true, 18, "mapa z projektem podziału nieruchomości", "Arial");
-      techReport.styleTextAndAddBreak(r2, false, true, 18, "KW WA5M/00475874/9", "Arial");
+      techReport.styleTextAndAddBreak(r2, false, true, 18, "KW WA5M/00000/9", "Arial");
 
       XWPFParagraph p3 = doc.createParagraph();
       p3.setAlignment(ParagraphAlignment.CENTER);

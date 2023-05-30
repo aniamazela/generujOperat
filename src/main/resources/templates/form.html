@@ -19,16 +19,25 @@
 <body>
     <div class="header">
         <h1>Generuj operat</h1>
-      </div>
-      <br><br>
+    </div>
+    <br><br>
     <form method="post" th:action="@{/api/word}" th:object="${technicalReport}">
         <div class="mb-3 mt-3">
             <label for="idBG">Id roboty geodezyjnej:</label>
-            <input type="text" class="form-control" id="idBG" placeholder="Podaj id roboty geodezyjnej" 
-            name="myIdBG" th:field="*{idReport}">
+            <input type="text" class="form-control" id="idBG" placeholder="Podaj id roboty geodezyjnej" name="myIdBG"
+                th:field="*{idReport}">
+
+                <select>
+                    <option th:each="company : ${companies}" th:value="${companyName}" th:text="${company.name}"></option>
+                </select>
+
             <input type="submit" value="Submit" />
-          </div>
+        </div>
     </form>
+
+
+
+
 </body>
 
 </html>
