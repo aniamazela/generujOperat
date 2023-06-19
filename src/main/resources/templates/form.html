@@ -27,8 +27,9 @@
             <input type="text" class="form-control" id="idBG" placeholder="Podaj id roboty geodezyjnej" name="myIdBG"
                 th:field="*{idReport}">
 
-                <select>
-                    <option th:each="company : ${companies}" th:value="${companyName}" th:text="${company.name}"></option>
+                <select th:name="companyName">
+                    <option th:each="company : ${companies}" th:value="${company.name}" 
+                    th:text="${company.name}"></option>
                 </select>
 
             <input type="submit" value="Submit" />

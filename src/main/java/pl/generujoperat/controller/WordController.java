@@ -3,8 +3,11 @@ package pl.generujoperat.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.generujoperat.helper.WordHelper;
+import pl.generujoperat.model.Company;
 import pl.generujoperat.model.TechnicalReport;
 import pl.generujoperat.repositories.CompanyRepository;
 
@@ -36,10 +39,11 @@ public class WordController {
 
         @PostMapping(value = "/word", produces = "application/vnd.openxmlformats-"
                         + "officedocument.wordprocessingml.document" )
-        public ResponseEntity<InputStreamResource> word(@ModelAttribute TechnicalReport technicalReport)
+        public ResponseEntity<InputStreamResource> word(@ModelAttribute TechnicalReport technicalReport,  
+        @RequestParam("companyName") String companyName)
                         throws IOException, InvalidFormatException {
 
-                ByteArrayInputStream bis = WordHelper.generateWord(technicalReport.getIdReport());
+                ByteArrayInputStream bis = WordHelper.generateWord(technicalReport.getIdReport(), companyName);
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Content-Disposition",
                                 "inline; filename=mydoc.docx");

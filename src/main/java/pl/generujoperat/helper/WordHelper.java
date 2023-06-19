@@ -17,7 +17,7 @@ import pl.generujoperat.model.TechnicalReport;
 public class WordHelper {
 
 
-  public static ByteArrayInputStream generateWord(String idReport)
+  public static ByteArrayInputStream generateWord(String idReport, String companyName)
       throws FileNotFoundException, IOException,
       InvalidFormatException {
 
@@ -54,7 +54,7 @@ public class WordHelper {
             techReport.styleText(r4, false, true, 13, "sporządził: geodeta uprawniony  nr 111 ", "Arial");
             techReport.styleText(r4, false, true, 13, "Jan Nowak ", "Arial");
             r4.addBreak();
-            techReport.styleText(r4, false, true, 13, "wykonawca:", "Arial");
+            techReport.styleText(r4, false, true, 13, "wykonawca:"+companyName, "Arial");
             r4.addBreak();
             techReport.styleText(r4, false, true, 13, "data:", "Arial");
 

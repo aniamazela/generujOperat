@@ -1,4 +1,4 @@
-drop table Company;
+-- //drop table Company;
 
 create table if not exists Company (
     id identity,
