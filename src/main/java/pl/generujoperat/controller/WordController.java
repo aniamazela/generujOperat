@@ -10,6 +10,7 @@ import pl.generujoperat.helper.WordHelper;
 import pl.generujoperat.model.Company;
 import pl.generujoperat.model.TechnicalReport;
 import pl.generujoperat.repositories.CompanyRepository;
+import pl.generujoperat.repositories.IdentifierRepository;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,9 +26,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/api")
 public class WordController {
         private final CompanyRepository companyRepo;
+        private final IdentifierRepository identifierRepo;
 
-        public WordController(CompanyRepository companyRepo) {
+        public WordController(CompanyRepository companyRepo, IdentifierRepository identifierRepo) {
                 this.companyRepo = companyRepo;
+                this.identifierRepo=identifierRepo;
             }
             
         @GetMapping()
@@ -40,10 +43,10 @@ public class WordController {
         @PostMapping(value = "/word", produces = "application/vnd.openxmlformats-"
                         + "officedocument.wordprocessingml.document" )
         public ResponseEntity<InputStreamResource> word(@ModelAttribute TechnicalReport technicalReport,  
-        @RequestParam("companyName") String companyName)
+        @RequestParam("companyName") String companyName, @RequestParam("myDzialkaEwid") String myDzialkaEwid)
                         throws IOException, InvalidFormatException {
 
-                ByteArrayInputStream bis = WordHelper.generateWord(technicalReport.getIdReport(), companyName);
+                ByteArrayInputStream bis = WordHelper.generateWord(technicalReport.getIdReport(), companyName, myDzialkaEwid);
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Content-Disposition",
                                 "inline; filename=mydoc.docx");

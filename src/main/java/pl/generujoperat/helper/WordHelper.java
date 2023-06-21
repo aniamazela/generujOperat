@@ -17,13 +17,13 @@ import pl.generujoperat.model.TechnicalReport;
 public class WordHelper {
 
 
-  public static ByteArrayInputStream generateWord(String idReport, String companyName)
+  public static ByteArrayInputStream generateWord(String idReport, String companyName, String myDzialkaEwid)
       throws FileNotFoundException, IOException,
       InvalidFormatException {
 
     try (XWPFDocument doc = new XWPFDocument()) {
       TechnicalReport techReport=new TechnicalReport();
-      techReport.createHeader(doc, idReport);
+      techReport.createHeader(doc, idReport, myDzialkaEwid);
 
       XWPFParagraph p1 = doc.createParagraph();
       p1.setAlignment(ParagraphAlignment.CENTER);

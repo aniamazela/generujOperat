@@ -1,6 +1,5 @@
 package pl.generujoperat.model;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
@@ -12,13 +11,22 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import pl.generujoperat.repositories.IdentifierRepository;
 
 @Data
+@AllArgsConstructor
+@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class TechnicalReport {
   private Long id;
   private String idReport;
   private String plotRegistrationNumber;
+  private final IdentifierRepository identifierRepo;
 
   public void styleText(XWPFRun run, Boolean bold, Boolean italic, Integer fontSize, String text, String fontFamily) {
     run.setBold(bold);
@@ -60,7 +68,7 @@ public class TechnicalReport {
     return content;
   }
 
-  public void createHeader(XWPFDocument doc, String idReport) {
+  public void createHeader(XWPFDocument doc, String idReport, String myDzialkaEwid) {
     XWPFHeaderFooterPolicy headerFooterPolicy = doc.getHeaderFooterPolicy();
     if (headerFooterPolicy == null)
       headerFooterPolicy = doc.createHeaderFooterPolicy();
@@ -68,7 +76,9 @@ public class TechnicalReport {
     XWPFParagraph paragraph = header.createParagraph();
     paragraph.setAlignment(ParagraphAlignment.LEFT);
     XWPFRun run = paragraph.createRun();
-    styleTextAndAddBreak(run, false, true, 11, "woj. ", "Times New Roman");
+    String Teryt=myDzialkaEwid.substring(0,8);
+    //String woj=identifierRepo.findByTeryt(Teryt).get().getVoivodship();
+    styleTextAndAddBreak(run, false, true, 11, "woj. "+Teryt, "Times New Roman");
     styleTextAndAddBreak(run, false, true, 11, "powiat ", "Times New Roman");
     styleTextAndAddBreak(run, false, true, 11, "dzielnica ", "Times New Roman");
     styleTextAndAddBreak(run, false, true, 11, "obr. ", "Times New Roman");
@@ -88,7 +98,6 @@ public class TechnicalReport {
     styleText(run, true, true, 11, "L.p.", "Arial");
     table.setWidth("100%");
 
-
     row.addNewTableCell();
     row.getCell(0).getParagraphArray(0).setSpacingAfter(0);
     row.getCell(1).getParagraphArray(0).setSpacingAfter(0);
@@ -100,27 +109,26 @@ public class TechnicalReport {
     styleText(table.getRow(0).getCell(2).getParagraphs().get(0).createRun(),
         true, true, 11, "NR STRONY", "Arial");
 
-
     ArrayList<String> content = createElementsOfContents();
     int contentSize = createElementsOfContents().size();
     for (int i = 1; i < contentSize; i++) {
       XWPFTableRow row2 = table.createRow();
-     // row2.getCell(0).setText(String.valueOf(i));
-     for (int j=0; j<=2; j++){
-      table.getRow(i).getCell(j).getParagraphs().get(0).setSpacingAfter(0);
-     }
-    //  table.getRow(i).getCell(0).getParagraphs().get(0).setSpacingAfter(0);
-    //  table.getRow(i).getCell(1).getParagraphs().get(0).setSpacingAfter(0);
-    //  table.getRow(i).getCell(2).getParagraphs().get(0).setSpacingAfter(0);
+      // row2.getCell(0).setText(String.valueOf(i));
+      for (int j = 0; j <= 2; j++) {
+        table.getRow(i).getCell(j).getParagraphs().get(0).setSpacingAfter(0);
+      }
+      // table.getRow(i).getCell(0).getParagraphs().get(0).setSpacingAfter(0);
+      // table.getRow(i).getCell(1).getParagraphs().get(0).setSpacingAfter(0);
+      // table.getRow(i).getCell(2).getParagraphs().get(0).setSpacingAfter(0);
       styleText(table.getRow(i).getCell(0).getParagraphs().get(0).createRun(),
-      false, true, 11, String.valueOf(i), "Arial");
+          false, true, 11, String.valueOf(i), "Arial");
       styleText(table.getRow(i).getCell(1).getParagraphs().get(0).createRun(),
-      false, true, 11, content.get(i), "Arial");
-table.getRow(0).getCell(0).setWidth("13.5%");
-table.getRow(0).getCell(1).setWidth("67.3%");
-table.getRow(0).getCell(2).setWidth("19.2%");
-      //row2.getCell(0).getParagraphArray(0).setSpacingAfter(0);
-      
+          false, true, 11, content.get(i), "Arial");
+      table.getRow(0).getCell(0).setWidth("13.5%");
+      table.getRow(0).getCell(1).setWidth("67.3%");
+      table.getRow(0).getCell(2).setWidth("19.2%");
+      // row2.getCell(0).getParagraphArray(0).setSpacingAfter(0);
+
       // row2.getCell(1).setText(String.valueOf(i));
 
     }

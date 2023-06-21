@@ -26,6 +26,9 @@
             <label for="idBG">Id roboty geodezyjnej:</label>
             <input type="text" class="form-control" id="idBG" placeholder="Podaj id roboty geodezyjnej" name="myIdBG"
                 th:field="*{idReport}">
+                <label for="dzialkaEwid">Id dz.ew.:</label>
+                <input type="text" class="form-control" id="dzialkaEwid" value="146518_8.0110.12" 
+                th:name="myDzialkaEwid">
 
                 <select th:name="companyName">
                     <option th:each="company : ${companies}" th:value="${company.name}" 
