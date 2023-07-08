@@ -1,8 +1,8 @@
-insert into Company (id, name, city, street, house_Number, zip_Code)
+insert into Companies (id, name, city, street, house_Number, zip_Code)
 values  (1, 'Firma1', 'Warszawa', 'ul. Syta ', '25/63', '02-685');
-insert into Company (id, name, city, street, house_Number, zip_Code)
+insert into Companies (id, name, city, street, house_Number, zip_Code)
 values  (2, 'Firma2', 'Warszawa', 'ul. Dolna ', '4/6', '01-785');
-insert into Company (id, name, city, street, house_Number, zip_Code)
+insert into Companies (id, name, city, street, house_Number, zip_Code)
 values  (3, 'Firma3', 'Warszawa', 'ul. Dolnaff ', '458/6', '01-785');
 
 insert into Properties (id, TERYT, voivodship, county, gmina, guarter)
