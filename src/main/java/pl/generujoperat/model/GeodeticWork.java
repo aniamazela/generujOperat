@@ -25,10 +25,12 @@ import pl.generujoperat.model.Property;
 public class GeodeticWork {
     @Id @GeneratedValue
 private Long id;
+private String idGeoWork;
 private LocalDate startDate;
 private LocalDate finishDate;
 @ManyToOne
 @JoinColumn(name = "company_id")
 private Company company;
+private String teryt;
 }
 
