@@ -18,19 +18,18 @@ import jakarta.persistence.Table;
 import pl.generujoperat.model.Company;
 import pl.generujoperat.model.Property;
 
-
 @Data
-@Table(name="geodetic_works")
+@Table(name = "geodetic_works")
 @Entity
 public class GeodeticWork {
-    @Id @GeneratedValue
-private Long id;
-private String idGeoWork;
-private LocalDate startDate;
-private LocalDate finishDate;
-@ManyToOne
-@JoinColumn(name = "company_id")
-private Company company;
-private String teryt;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String idGeoWork;
+    private LocalDate startDate;
+    private LocalDate finishDate;
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
+    private String teryt;
 }
-

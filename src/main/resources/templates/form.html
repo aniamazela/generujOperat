@@ -26,36 +26,60 @@
         <h1>Generuj operat</h1>
     </div>
     <br><br>
-    <form method="post" th:action="@{/api/word}" th:object="${geodeticWork}">
-        <div class="mb-3 mt-3">
-            <label for="idBG">Id roboty geodezyjnej:</label>
-            <input type="text" class="form-control" id="idBG" placeholder="Podaj id roboty geodezyjnej" name="myIdBG"
+    <table>
+        <form method="post" th:action="@{/api/word}" th:object="${geodeticWork}">
+        <tr>
+            <td>
+                <label for="idBG">Id roboty geodezyjnej:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" id="idBG" placeholder="Podaj id roboty geodezyjnej" name="myIdBG"
                 th:field="*{idGeoWork}" >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
                 <label for="dzialkaEwid">Id dz.ew.:</label>
-                <input type="text" class="form-control" id="dzialkaEwid" value="146518_8.0110.12" 
-                th:name="myDzialkaEwid">
+            </td>
+            <td>
+                <input type="text" class="form-control" id="dzialkaEwid" th:value="146518_8.0110.12" 
+                th:name="myDzialkaEwid"> 
+            </td>
+        </tr>
 
-                <select th:name="companyName">
-                    <option th:each="company : ${companies}" th:value="${company.name}" 
-                    th:text="${company.name}" th:field="*{company}"></option>
+        <tr>
+            <td>
+                <lable>Nazwa firmy: </lable>
+            </td>
+            <td>
+                <select th:field="*{company}">
+                    <option th:each="comp : ${companies}" th:text="${comp.name}" 
+                    th:value="${comp.id}"></option>
                 </select>
-
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Data rozpoczęcia pracy: </label>
+            </td>
+            <td>
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon" id="calendar">
                         <span class="glyphicon glyphicon-calendar"></span></span>
                     <input type="text" class="form-control" required id="datepicker" placeholder="Wybierz datę rozpoczęcia roboty."
                         th:name="date" style="width: 150px;" aria-describedby="calendar" th:field="*{startDate}"/>
                 </div>
-
-
-
-            <input type="submit" value="Submit" />
-        </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                <input type="submit" value="Submit" />
+            </td>
+        </tr>
     </form>
-
-
-
-
+    </table>
+    
 </body>
 
 <script>

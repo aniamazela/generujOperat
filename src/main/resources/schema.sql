@@ -23,9 +23,11 @@ create table if not exists Companies (
 
  create table if not exists geodetic_works (
    id bigint not null,
-   startDate DATE,
-   finishDate DATE,
+   start_date DATE,
+   finish_date DATE,
    company_id bigint not null,
+   id_geo_work VARCHAR(50),
+   teryt VARCHAR(50),
    primary key (id)
  );
 

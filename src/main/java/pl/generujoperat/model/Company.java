@@ -4,6 +4,7 @@ package pl.generujoperat.model;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +31,6 @@ public class Company {
  private String street;
  private String houseNumber;
  private String zipCode;  
- @OneToMany(mappedBy="company")
+ @OneToMany(mappedBy="company", cascade = CascadeType.ALL)
  private Set <GeodeticWork> geoWorks;
 }

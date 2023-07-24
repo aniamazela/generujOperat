@@ -35,12 +35,12 @@ public class WordController {
         private final GeodeticWorkRepository geodeticWorkRepo;
 
         public WordController(CompanyRepository companyRepo, IdentifierRepository identifierRepo,
-        GeodeticWorkRepository geodeticWorkRepo) {
+                        GeodeticWorkRepository geodeticWorkRepo) {
                 this.companyRepo = companyRepo;
-                this.identifierRepo=identifierRepo;
-                this.geodeticWorkRepo=geodeticWorkRepo;
-            }
-            
+                this.identifierRepo = identifierRepo;
+                this.geodeticWorkRepo = geodeticWorkRepo;
+        }
+
         @GetMapping()
         public String home(Model model) {
                 model.addAttribute("technicalReport", new TechnicalReport());
@@ -50,16 +50,19 @@ public class WordController {
         }
 
         @PostMapping(value = "/word", produces = "application/vnd.openxmlformats-"
-                        + "officedocument.wordprocessingml.document" )
-        public ResponseEntity<InputStreamResource> word(@ModelAttribute TechnicalReport technicalReport,  
-        @RequestParam("companyName") String companyName, @RequestParam("myDzialkaEwid") String myDzialkaEwid,
-        GeodeticWork geodeticWork, Model model)
+                        + "officedocument.wordprocessingml.document")
+        public ResponseEntity<InputStreamResource> word(@ModelAttribute TechnicalReport technicalReport,
+                        
+                        @RequestParam("myDzialkaEwid") String myDzialkaEwid,
+                        GeodeticWork geodeticWork, Model model)
                         throws IOException, InvalidFormatException {
-                
-                geodeticWork.setFinishDate(LocalDate.now());
+
+                //Company company=companyRepo.findB
+                                geodeticWork.setFinishDate(LocalDate.now());
                 geodeticWorkRepo.save(geodeticWork);
 
-                ByteArrayInputStream bis = WordHelper.generateWord(technicalReport.getIdReport(), companyName, myDzialkaEwid);
+                ByteArrayInputStream bis = WordHelper.generateWord(technicalReport.getIdReport(), "companyName",
+                                myDzialkaEwid);
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Content-Disposition",
                                 "inline; filename=mydoc.docx");
